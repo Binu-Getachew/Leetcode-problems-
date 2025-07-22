@@ -1,0 +1,36 @@
+import random
+
+#name=str(input("What is your name?"))
+#print("Welcome to word guessing game", name)
+
+words=["computer","python","science"]
+word=random.choice(words)
+print(word)
+
+guesses=''
+limit=12
+
+while limit>0:
+    failed=0
+    guess=input("Enter the letter:")
+    guesses += guess
+    
+    for i in word:
+        if i in guesses:
+            print(i,end='')
+
+        else:
+            print('_')
+            failed+=1
+    if failed == 0:
+        print("You Win")
+        print("The word is: ", word)
+        break
+        
+    if guess not in word:
+        print("Letter is not in the word")
+        limit-=1
+        if (limit<1):
+            print("You lost")
+    
+
