@@ -1,0 +1,72 @@
+#hotel management system
+
+class Hotels:
+    def __init__(self,name,location,price,rating,available_rooms,password):
+        self.name=name
+        self.location=location
+        self.price=price
+        self.rating=rating
+        self.available_rooms=available_rooms
+        self.password=password
+        
+    def book_room(self):
+        if self.available_rooms>0:
+            self.available_rooms-=1
+            print(f"You booked a room at {self.name}. Rooms left:{self.available_rooms}")
+        else:
+            print(f"Sorry, {self.name} has no rooms left!")
+
+def sort_and_display(hotel_list, key_name, title):
+    sorted_hotels = sorted(hotel_list, key=lambda h: getattr(h, key_name))
+    print(f"HOTELS SORTED BY {title.upper()}")
+    print("-" * (21 + len(title)))
+    for i,hotel in enumerate(sorted_hotels, start=1):
+        print(f"{i}. Name: {hotel.name} | Location: {hotel.location} | Price: {hotel.price} | Rating: {hotel.rating} | Rooms: {hotel.available_rooms}")
+    return sorted_hotels
+
+h1=Hotels("Nine","Home plus",45000,4.8,4,1111)
+h2=Hotels("May","Chungnam",18700,4.5,5,1112)
+h3=Hotels("Wolpyeong","Yousong",17000,4.3,8,1113)
+
+hotels=[h1,h2,h3]
+
+for hotel in hotels:
+    print("The information for ",hotel.name," is as followes")
+    print("Location:",hotel.location,end=' | ')
+    print("Price per night:",hotel.price,end=' | ')
+    print("Rating:",hotel.rating,end=' | ')
+    print("Rooms available:",hotel.available_rooms,end=' | ')
+    print("\n")
+
+
+print("Welcome to Agoda booking site. We have various hotels available")
+see=int(input("Do you want to check the order of our hotels?\n1.Yes\n2.No"))
+print("\n")
+sorted_list = hotels
+if see==1:
+    print("Please enter your choice to see the order of hotels based on PRICE,RATING,NAME")
+    print("1.Price\n2.Rating\n3.Name")
+    customer_choice=int(input("Please enter one of the above"))
+    
+    if customer_choice == 1:
+        sorted_list = sort_and_display(hotels, "price", "price")
+    elif customer_choice == 2:
+        sorted_list = sort_and_display(hotels, "rating", "rating")
+    elif customer_choice == 3:
+        sorted_list = sort_and_display(hotels, "name", "name")
+    else:
+        print("Invalid input, showing unsorted hotels.")
+
+elif see==2:
+    print("Okay to booking!")
+    print("The information for hotels is as followes")
+    order=1
+    for hotel in hotels:
+        print(order,".",hotel.name)
+        order+=1
+
+choose=int(input("Please enter the hotel you want:"))
+if 1 <= choose <= len(hotels):
+    sorted_list[choose - 1].book_room()
+else:
+    print("Invalid hotel number.")
