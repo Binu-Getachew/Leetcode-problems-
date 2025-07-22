@@ -1,0 +1,32 @@
+import random
+
+array1=[0]*(random.randint(1,10))
+array2=[0]*random.randint(1,10)
+array=[0]*(len(array1)+len(array2))
+
+for i in range (len(array1)):
+    array1[i]=random.randint(1,100)
+for i in range(len(array2)):
+    array2[i]=random.randint(1,100)
+
+print("Array 1:",sorted(array1))
+print("Array 2:",sorted(array2))
+
+
+for i in range (len(array1)):
+    array[i]=array1[i]
+
+for i in range(len(array2)):
+    array[i+len(array1)]=array2[i]
+
+array.sort()
+print("Array: ",array)
+
+if len(array) % 2 == 0:
+    mid = len(array) // 2
+    median = (array[mid - 1] + array[mid]) / 2
+else:
+    median = array[len(array) // 2]
+
+print("The median of the sorted arrays is:")
+print(median)
