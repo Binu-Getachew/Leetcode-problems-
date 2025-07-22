@@ -1,0 +1,17 @@
+import random
+import numpy as np
+
+array=[0]*random.randint(5,10)
+for i in range(len(array)):
+    array[i]=random.randint(1,100)
+    
+array.sort()
+unique_elements=np.unique(array)
+print(array)
+print(unique_elements)
+
+maximum=0
+for i in range(len(unique_elements)):
+    maximum+=unique_elements[i]
+
+print(maximum)
