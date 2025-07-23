@@ -1,0 +1,41 @@
+word = list("cdbcbbaaabab")
+x = 4  # "ab"
+y = 5  # "ba"
+total_sum = 0
+
+# First: determine which pair to remove first
+if y > x:
+    first_pair = ("b", "a")
+    first_points = y
+    second_pair = ("a", "b")
+    second_points = x
+else:
+    first_pair = ("a", "b")
+    first_points = x
+    second_pair = ("b", "a")
+    second_points = y
+
+# First pass – remove high point pair
+i = 0
+while i < len(word) - 1:
+    if word[i] == first_pair[0] and word[i + 1] == first_pair[1]:
+        total_sum += first_points
+        word.pop(i)
+        word.pop(i)
+        # After pop, step back if possible
+        i = max(0, i - 1)
+    else:
+        i += 1
+
+# Second pass – remove the other pair
+i = 0
+while i < len(word) - 1:
+    if word[i] == second_pair[0] and word[i + 1] == second_pair[1]:
+        total_sum += second_points
+        word.pop(i)
+        word.pop(i)
+        i = max(0, i - 1)
+    else:
+        i += 1
+
+print(total_sum)  # ✅ Outputs: 19
