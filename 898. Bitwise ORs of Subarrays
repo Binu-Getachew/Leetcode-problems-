@@ -1,0 +1,15 @@
+from typing import List
+
+class Solution:
+    def subarrayBitwiseORs(self, arr: List[int]) -> int:
+        res = set()
+        cur = set()
+
+        for num in arr:
+            next_cur = {num}
+            for prev in cur:
+                next_cur.add(prev | num)
+            cur = next_cur
+            res.update(cur)
+
+        return len(res)
