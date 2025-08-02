@@ -1,0 +1,44 @@
+from collections import Counter
+from typing import List
+
+class Solution:
+    def minCost(self, basket1: List[int], basket2: List[int]) -> int:
+        count1 = Counter(basket1)
+        count2 = Counter(basket2)
+
+        
+        total = Counter()
+        for key in set(count1.keys()).union(count2.keys()):
+            total[key] = count1[key] + count2[key]
+            if total[key] % 2 != 0:
+                return -1  
+
+        
+        excess1 = []
+        excess2 = []
+        for key in total:
+            diff = count1[key] - total[key] // 2
+            if diff > 0:
+                excess1.extend([key] * diff)
+            elif diff < 0:
+                excess2.extend([key] * (-diff))
+
+        
+        excess1.sort()
+        excess2.sort(reverse=True)
+        swaps = len(excess1)
+        if swaps == 0:
+            return 0
+
+        min_element = min(basket1 + basket2)
+        cost = 0
+
+        for i in range(swaps):
+            
+            cost += min(
+                excess1[i],
+                excess2[i],
+                2 * min_element  
+            )
+
+        return cost
