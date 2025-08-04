@@ -1,0 +1,16 @@
+from collections import Counter
+from typing import list
+
+class solution:
+    
+    def totalFruit(self,fruits:List[int])->int:
+        counter=Counter(fruits)
+        most_commons=counter.most_common(2)
+        freq_total=sum(freq for _, freq in most_commons)
+    
+        return freq_total
+
+sol=Solution()
+arr = [0,1,2,2]
+
+print(collect(arr))
